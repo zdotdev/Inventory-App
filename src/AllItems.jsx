@@ -113,7 +113,8 @@ function AllItems () {
         {data.map(element => (
           <div id='itemz' key={element._id}>
             <p>
-              Product Name: <strong>{element.name}</strong>
+              Product Name: <strong>{element.name}</strong>{' '}
+              <span>{element.quantity < 10 ? '(Must reorder)' : ''}</span>
             </p>
             <p>Price: ₱{element.price}</p>
             <p style={{ color: element.quantity < 10 ? 'red' : 'green' }}>
@@ -126,21 +127,30 @@ function AllItems () {
         {showDialog && (
           <div>
             <h2>Item Details</h2>
-            <input
-              type='text'
-              value={name}
-              onChange={e => setName(e.target.value)}
-            />
-            <input
-              type='text'
-              value={price}
-              onChange={e => setPrice(e.target.value)}
-            />
-            <input
-              type='text'
-              value={quantity}
-              onChange={e => setQuantity(e.target.value)}
-            />
+            <label>
+              Product Name:
+              <input
+                type='text'
+                value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </label>
+            <label>
+              Price:
+              <input
+                type='text'
+                value={price}
+                onChange={e => setPrice(e.target.value)}
+              />
+            </label>
+            <label>
+              Quantity:
+              <input
+                type='text'
+                value={quantity}
+                onChange={e => setQuantity(e.target.value)}
+              />
+            </label>
             <button onClick={handleSave}>Save</button>
             <button onClick={handleCloseDialog}>Close</button>
           </div>

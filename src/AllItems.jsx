@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import './Items.css'
 
 function AllItems () {
   const [data, setData] = useState([])
@@ -81,6 +82,7 @@ function AllItems () {
       )
       .then(() => {
         console.log('Item added successfully')
+        window.location.reload()
       })
       .catch(err => {
         console.error(err.message)
@@ -89,55 +91,61 @@ function AllItems () {
 
   return (
     <>
-      <form onSubmit={handleAddItem}>
-        <input
-          type='text'
-          placeholder='Name'
-          onChange={e => setName(e.target.value)}
-        />
-        <input
-          type='text'
-          placeholder='Price'
-          onChange={e => setPrice(e.target.value)}
-        />
-        <input
-          type='text'
-          placeholder='Quantity'
-          onChange={e => setQuantity(e.target.value)}
-        />
-        <button type='submit'>Add Item</button>
-      </form>
-      {data.map(element => (
-        <div key={element._id}>
-          <strong>{element.name}</strong>
-          <p>{element.price}</p>
-          <p>{element.quantity}</p>
-          <button onClick={() => handleButtonClick(element._id)}>Edit</button>
-          <button onClick={() => handleDelete(element._id)}>Delete</button>
-        </div>
-      ))}
-      {showDialog && (
-        <div>
-          <h2>Item Details</h2>
+      <main>
+        <div id='first-form'>
           <input
             type='text'
-            value={name}
+            placeholder='Name'
             onChange={e => setName(e.target.value)}
           />
           <input
             type='text'
-            value={price}
+            placeholder='Price'
             onChange={e => setPrice(e.target.value)}
           />
           <input
             type='text'
-            value={quantity}
+            placeholder='Quantity'
             onChange={e => setQuantity(e.target.value)}
           />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={handleCloseDialog}>Close</button>
+          <button onClick={handleAddItem}>Add Item</button>
         </div>
-      )}
+        {data.map(element => (
+          <div id='itemz' key={element._id}>
+            <p>
+              Product Name: <strong>{element.name}</strong>
+            </p>
+            <p>Price: ₱{element.price}</p>
+            <p style={{ color: element.quantity < 10 ? 'red' : 'green' }}>
+              Quantity: {element.quantity}
+            </p>
+            <button onClick={() => handleButtonClick(element._id)}>Edit</button>
+            <button onClick={() => handleDelete(element._id)}>Delete</button>
+          </div>
+        ))}
+        {showDialog && (
+          <div>
+            <h2>Item Details</h2>
+            <input
+              type='text'
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+            <input
+              type='text'
+              value={price}
+              onChange={e => setPrice(e.target.value)}
+            />
+            <input
+              type='text'
+              value={quantity}
+              onChange={e => setQuantity(e.target.value)}
+            />
+            <button onClick={handleSave}>Save</button>
+            <button onClick={handleCloseDialog}>Close</button>
+          </div>
+        )}
+      </main>
     </>
   )
 }

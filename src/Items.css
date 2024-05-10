@@ -1,0 +1,34 @@
+*,
+*::before,
+*::after {
+  content: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}
+
+/* start */
+main{
+    display: flex;
+    gap: 1rem;
+    width: 100vw;
+    height: auto;
+    padding-block: 2rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#first-form{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+#itemz{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
